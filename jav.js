@@ -2,92 +2,88 @@ let playerSelection
 let playerScore = 0;
 let computerScore = 0;
 let draws = 0;     
-function computerPlay(){
-    let choice = ['rock','paper', 'scizzor']
-    return choice[Math.floor(Math.random()*choice.length)];
-}
 
-let playerWinRound = "Player wins this round!"
-let computerWinRound = "Computer wins this round!"
-let draw = "Draw!"
-let playerWin = "Player wins the game! Congratulations!"
-let computerWin = "Computer wins the game! Congratulations!"
+const result = document.querySelector('div')
 
-let computerSelection
+document.getElementById('rock').onclick = user;
+document.getElementById('paper').onclick = user;
+document.getElementById('scizzor').onclick = user;
 
-function playRound(playerSelection, computerSelection){      
-   
-    computerSelection = computerPlay();
+function user(){
+    playerSelection = this.id;
+    let computerSelection =Math.random();
+    if (computerSelection< 0.34) {
+        computerSelection= "rock";
+     }else if(computerSelection<= 0.67) {
+        computerSelection= "paper";
+     }else{
+        computerSelection= "scizzor";
+     };
     
-    if (playerSelection == 'rock' && computerSelection =='paper'){
-         return computerWinRound;
+    const computerWinRound = document.createElement('p');
+         computerWinRound.textContent = "Computer wins this round!";
+
+    const playerWinRound= document.createElement('p');
+    playerWinRound.textContent="Player wins this round!";
+
+
+    const draw = document.createElement('p');
+    draw.textContent = 'Draw!'
+  
+       if (playerSelection == 'rock' && computerSelection =='paper'){
+         
+         result.appendChild(computerWinRound);
+         computerScore++;
+
     } else if( playerSelection == 'rock' && computerSelection =='scizzor'){
-        return playerWinRound;
+     
+     result.appendChild(playerWinRound);
+     playerScore++;
+
     } else if (playerSelection == 'rock' && computerSelection == 'rock'){
-        return draw;
+        result.appendChild(draw);
+        draws++;
+
     }
-    else;
 
 
     if(playerSelection == 'scizzor' && computerSelection == 'rock'){
-           return computerWinRound;
-    }
-    else if ( playerSelection == 'scizzor' && computerSelection == 'paper'){
-        return playerWinRound;
-    }
-    else if ( playerSelection == 'scizzor' && computerSelection == 'scizzor'){
-        return draw;
-    }
-    else;
-
-    if(playerSelection == 'paper' && computerSelection == 'scizzor'){
-        return computerWinRound;
-    }
-    else if ( playerSelection == 'paper' && computerSelection == 'rock'){
-        return playerWinRound;
-    }
-    else if (playerSelection == 'paper' && computerSelection == 'paper'){
-        return draw;
-    }
-    
-    else return 'something went wrong'
-}
-   
-for (let i = 0; i < 1000; i++) {
-    let playerSelection = prompt("Rock, paper, or scissors?").toLowerCase();
-    const computerSelection = computerPlay();
-    let roundResult = playRound(playerSelection, computerSelection);
-    console.log(roundResult);
-    gameScore(roundResult);
-    console.log("Your score is " + playerScore);
-    console.log("The computer's score is " + computerScore);
-  
-    if (playerScore === 5 || computerScore === 5) {
-      break;
-    }
-  }
-        
-function gameScore(roundResult) {
-  
-    if (roundResult === playerWinRound) {
-      playerScore++;
-    } else if (roundResult === draw) {
-      draw++;
-    } else {
+      result.appendChild(computerWinRound)
       computerScore++;
     }
-  
-  
-    if (playerScore === 5) {
-      console.log(playerWin);
-      return;
+    else if ( playerSelection == 'scizzor' && computerSelection == 'paper'){
+        result.appendChild(playerWinRound)
+        playerScore++;
     }
-    if (computerScore === 5) {
-      console.log(computerWin);
-      return;   
+    else if ( playerSelection == 'scizzor' && computerSelection == 'scizzor'){
+      result.appendChild(draw)
+      draws++;
     }
-}     
 
-
-
-
+    if(playerSelection == 'paper' && computerSelection == 'scizzor'){
+      result.appendChild(computerWinRound)
+      computerScore++;
+    }
+    else if ( playerSelection == 'paper' && computerSelection == 'rock'){
+        result.appendChild(playerWinRound)
+        playerScore++;
+    }
+    else if (playerSelection == 'paper' && computerSelection == 'paper'){
+      result.appendChild(draw)
+      draws++;
+    }
+    
+  
+    if (playerScore === 5){ 
+      const pScore = document.createElement('p')
+      pScore.textContent = `player score is '${playerScore}, Player wins the game! Congratulations!'`
+        result.appendChild(pScore) 
+    }
+    else if(computerScore === 5){
+      const cScore = document.createElement('p')
+      cScore.textContent = `Computer score is ${computerScore},Computer wins the game! Congratulations! `
+      result.appendChild(cScore)
+    }
+    
+  
+}
