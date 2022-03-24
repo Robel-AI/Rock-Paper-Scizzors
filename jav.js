@@ -20,10 +20,10 @@ function user(){
         computerSelection= "scizzor";
      };
     
-     const computerWinRound = document.getElementsByClassName('.computerWin');
-         
+    const computerWinRound = document.createElement('p');
+         computerWinRound.textContent = "Computer wins this round!";
 
-    const playerWinRound= document.getElementsByClassName('.playerWin');
+    const playerWinRound= document.createElement('p');
     playerWinRound.textContent="Player wins this round!";
 
 
@@ -32,13 +32,12 @@ function user(){
   
        if (playerSelection == 'rock' && computerSelection =='paper'){
          
-        computerWinRound.textContent = "Computer wins this round!";
+         result.appendChild(computerWinRound);
          computerScore++;
 
     } else if( playerSelection == 'rock' && computerSelection =='scizzor'){
      
-      const playerWinRound= document.getElementsByClassName('.playerWin');
-      playerWinRound.textContent="Player wins this round!";
+     result.appendChild(playerWinRound);
      playerScore++;
 
     } else if (playerSelection == 'rock' && computerSelection == 'rock'){
@@ -49,7 +48,7 @@ function user(){
 
 
     if(playerSelection == 'scizzor' && computerSelection == 'rock'){
-      computerWinRound.textContent = "Computer wins this round!";
+      result.appendChild(computerWinRound)
       computerScore++;
     }
     else if ( playerSelection == 'scizzor' && computerSelection == 'paper'){
@@ -62,7 +61,7 @@ function user(){
     }
 
     if(playerSelection == 'paper' && computerSelection == 'scizzor'){
-      computerWinRound.textContent = "Computer wins this round!";
+      result.appendChild(computerWinRound)
       computerScore++;
     }
     else if ( playerSelection == 'paper' && computerSelection == 'rock'){
