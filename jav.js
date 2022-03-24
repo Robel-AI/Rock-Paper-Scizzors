@@ -3,7 +3,7 @@ let playerScore = 0;
 let computerScore = 0;
 let draws = 0;     
 
-const result = document.querySelector('div')
+const result = document.querySelector('.results')
 
 document.getElementById('rock').onclick = user;
 document.getElementById('paper').onclick = user;
@@ -20,10 +20,10 @@ function user(){
         computerSelection= "scizzor";
      };
     
-    const computerWinRound = document.createElement('p');
-         computerWinRound.textContent = "Computer wins this round!";
+     const computerWinRound = document.getElementsByClassName('.computerWin');
+         
 
-    const playerWinRound= document.createElement('p');
+    const playerWinRound= document.getElementsByClassName('.playerWin');
     playerWinRound.textContent="Player wins this round!";
 
 
@@ -32,12 +32,13 @@ function user(){
   
        if (playerSelection == 'rock' && computerSelection =='paper'){
          
-         result.appendChild(computerWinRound);
+        computerWinRound.textContent = "Computer wins this round!";
          computerScore++;
 
     } else if( playerSelection == 'rock' && computerSelection =='scizzor'){
      
-     result.appendChild(playerWinRound);
+      const playerWinRound= document.getElementsByClassName('.playerWin');
+      playerWinRound.textContent="Player wins this round!";
      playerScore++;
 
     } else if (playerSelection == 'rock' && computerSelection == 'rock'){
@@ -48,7 +49,7 @@ function user(){
 
 
     if(playerSelection == 'scizzor' && computerSelection == 'rock'){
-      result.appendChild(computerWinRound)
+      computerWinRound.textContent = "Computer wins this round!";
       computerScore++;
     }
     else if ( playerSelection == 'scizzor' && computerSelection == 'paper'){
@@ -61,7 +62,7 @@ function user(){
     }
 
     if(playerSelection == 'paper' && computerSelection == 'scizzor'){
-      result.appendChild(computerWinRound)
+      computerWinRound.textContent = "Computer wins this round!";
       computerScore++;
     }
     else if ( playerSelection == 'paper' && computerSelection == 'rock'){
@@ -78,11 +79,17 @@ function user(){
       const pScore = document.createElement('p')
       pScore.textContent = `player score is '${playerScore}, Player wins the game! Congratulations!'`
         result.appendChild(pScore) 
+        document.getElementById('rock').disabled =true;
+        document.getElementById('paper').disabled = true;
+        document.getElementById('scizzor').disabled = true;
     }
     else if(computerScore === 5){
       const cScore = document.createElement('p')
       cScore.textContent = `Computer score is ${computerScore},Computer wins the game! Congratulations! `
       result.appendChild(cScore)
+      document.getElementById('rock').disabled =true;
+        document.getElementById('paper').disabled = true;
+        document.getElementById('scizzor').disabled = true;
     }
     
   
